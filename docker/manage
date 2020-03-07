@@ -46,6 +46,13 @@ exit 1
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
+function echoGreen (){
+  _msg="${@}"
+  _green='\e[32m'
+  _nc='\e[0m' # No Color
+  echo -e "${_green}${_msg}${_nc}"
+}
+
 configureEnvironment () {
 
   if [ -f .env ]; then
@@ -110,19 +117,18 @@ getStartupParams() {
 
 build() {
   # Build all containers in the docker-compose file
-  echo -e "\nBuilding containers ..."
   build-api
 }
 
 build-api() {
   BASE_IMAGE="cass-api-builder:latest"
 
-  echo -e "\nBuilding api-builder ..."
+  echoGreen "\n\nBuilding api-builder ...\n"
   docker build \
     -t "${BASE_IMAGE}" \
     -f '../openshift/templates/api-builder/Dockerfile' '../openshift/templates/api-builder'
 
-  echo -e "\nBuilding api ..."
+  echoGreen "\n\nBuilding api ...\n"
   ${S2I_EXE} build \
     -s 'file://../.s2i/bin' \
     '../' \
