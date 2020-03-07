@@ -1,5 +1,9 @@
 # Running the CASS API in Docker
 
+This is the API Docker portion of the CASS appliaction.  The Frontend portion of the application is in the CASS Frontend repository.
+
+See the docker folder of the CASS Frontend repository for details.
+
 ## Build
 ```
 Wade@Epoch MINGW64 /c/cass-api/docker (master)
@@ -38,6 +42,9 @@ appdb=# select count(*) from shersched.duty;
 -------
   3706
 (1 row)
+
+appdb=# \q
+bash-4.2$ exit
 ```
 
 ## Stop without deleting data
